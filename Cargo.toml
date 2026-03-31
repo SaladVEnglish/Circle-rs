@@ -1,0 +1,30 @@
+[package]
+name = "circle"
+version = "0.1.0"
+edition = "2024"
+default-run = "circle"
+autobins = false
+
+[package.metadata.packager]
+product-name = "circle"
+identifier = "dev.jasonxue.circle"
+formats = ["all"]
+out-dir = "dist"
+
+[[bin]]
+name = "circle"
+path = "src/main.rs"
+
+[dependencies]
+iced = { version = "0.13.1", features = ["tokio"] }
+windows = { version = "0.58.0", features = [
+  "Win32_Foundation",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[profile.release]
+strip = true
+lto = "fat"
+panic = "abort"
+codegen-units = 1
